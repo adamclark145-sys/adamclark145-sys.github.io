@@ -4,79 +4,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FENIX // INTELLIGENCE HUB</title>
-  <!-- Tailwind CSS Engine -->
-  <script src="https://jsdelivr.net"></script>
+  
+  <!-- Bulletproof Production Layout Engine (Universally Allowed) -->
+  <link href="https://cloudflare.com" rel="stylesheet">
+  
   <style>
-    /* Premium Cyber-Slate & Neon Styling */
+    /* Complete Embedded Cyberpunk Neon Theme Rules */
     body {
-      background-color: #0b0f19;
-      color: #f1f5f9;
+      background-color: #080c14 !important;
+      color: #f1f5f9 !important;
       background-image: 
-        radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(30, 58, 138, 0.2) 0px, transparent 50%);
-      background-attachment: fixed;
-      transition: background-color 0.4s ease, color 0.4s ease;
+        radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.18) 0px, transparent 45%),
+        radial-gradient(at 100% 100%, rgba(30, 58, 138, 0.25) 0px, transparent 45%) !important;
+      background-attachment: fixed !important;
     }
     
-    .glass-card {
-      background: rgba(17, 24, 39, 0.75);
+    .cyber-glass {
+      background: rgba(13, 18, 30, 0.8) !important;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(249, 115, 22, 0.2);
-      box-shadow: 0 0 25px rgba(249, 115, 22, 0.05);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(249, 115, 22, 0.25) !important;
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.04) !important;
+      transition: all 0.3s ease-in-out;
     }
     
-    .glass-card:hover {
-      border-color: rgba(249, 115, 22, 0.5);
-      box-shadow: 0 0 35px rgba(249, 115, 22, 0.15);
+    .cyber-glass:hover {
+      border-color: rgba(249, 115, 22, 0.6) !important;
+      box-shadow: 0 0 35px rgba(249, 115, 22, 0.18) !important;
       transform: translateY(-2px);
     }
 
-    .neon-text-glow {
-      text-shadow: 0 0 12px rgba(249, 115, 22, 0.8), 0 0 2px rgba(249, 115, 22, 1);
+    .neon-text {
+      color: #f97316 !important;
+      text-shadow: 0 0 12px rgba(249, 115, 22, 0.75), 0 0 2px rgba(249, 115, 22, 1) !important;
     }
 
-    .neon-border-glow {
-      box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
-    }
-
-    /* Custom Form Control Reset */
-    input, select {
-      background-color: rgba(7, 10, 19, 0.8) !important;
-      border: 1px solid rgba(249, 115, 22, 0.2) !important;
-      color: #ffffff !important;
+    .neon-btn {
+      background-color: #ea580c !important;
+      border: 1px solid #f97316 !important;
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.3) !important;
       transition: all 0.2s ease;
     }
-    input:focus, select:focus {
+    .neon-btn:hover {
+      background-color: #f97316 !important;
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.6) !important;
+    }
+
+    /* Input & Select Box Styling Overrides */
+    .cyber-input {
+      background-color: rgba(5, 7, 12, 0.9) !important;
+      border: 1px solid rgba(249, 115, 22, 0.25) !important;
+      color: #ffffff !important;
+    }
+    .cyber-input:focus {
       border-color: #f97316 !important;
+      outline: none !important;
       box-shadow: 0 0 12px rgba(249, 115, 22, 0.4) !important;
+    }
+    select option {
+      background-color: #0d121e !important;
+      color: #ffffff !important;
     }
   </style>
 </head>
-<body class="p-4 sm:p-8 min-h-screen font-sans antialiased">
+<body class="p-4 sm:p-8 min-h-screen">
   
-  <div class="max-w-6xl mx-auto space-y-8">
+  <div class="max-w-6xl mx-auto" style="margin-top: 2rem;">
     
     <!-- HEADER HUB -->
-    <header class="flex justify-between items-center border-b border-slate-800/80 pb-5">
-      <div class="flex items-center space-x-3">
-        <div class="h-3 w-3 rounded-full bg-orange-500 animate-pulse shadow-[0_0_15px_#f97316]"></div>
-        <h1 class="text-xl font-black tracking-widest text-orange-500 uppercase neon-text-glow">Fenix // Portal</h1>
+    <header class="flex justify-between items-center border-b border-gray-800 pb-5 mb-8">
+      <div class="flex items-center">
+        <div class="h-3 w-3 rounded-full bg-orange-500 animate-pulse mr-3" style="box-shadow: 0 0 15px #f97316;"></div>
+        <h1 class="text-xl font-black tracking-widest uppercase neon-text">Fenix // Portal</h1>
       </div>
-      <span class="text-[10px] text-slate-500 font-mono tracking-wider">v4.0.0_CYBERPUNK</span>
+      <span class="text-xs text-gray-500 font-mono tracking-wider">v4.1.0_PROD</span>
     </header>
 
     <!-- UNIFIED GLOBAL SEARCH ENGINE -->
-    <section class="glass-card p-3 rounded-2xl flex flex-col md:flex-row gap-3">
-      <select id="engineSelect" class="bg-transparent text-slate-200 font-bold text-xs px-4 py-3.5 rounded-xl outline-none cursor-pointer md:w-44">
+    <section class="cyber-glass p-3 rounded-2xl flex flex-col md:flex-row gap-3 mb-8">
+      <select id="engineSelect" class="cyber-input font-bold text-xs p-3 rounded-xl outline-none cursor-pointer md:w-44 mb-2 md:mb-0">
         <option value="google">⚡ GOOGLE ENGINE</option>
         <option value="duckduckgo">🔒 DUCKDUCKGO</option>
         <option value="bing">🔍 BING SEARCH</option>
       </select>
-      <div class="flex-1 flex gap-2 p-1 md:p-0">
-        <input type="text" id="searchInput" placeholder="Query global datastreams..." class="w-full bg-transparent rounded-xl px-4 py-3 text-sm outline-none text-white font-medium placeholder-slate-500">
-        <button onclick="executeGlobalSearch()" class="bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs uppercase tracking-widest px-8 rounded-xl transition-all neon-border-glow cursor-pointer active:scale-95">
+      <div class="flex-1 flex gap-2">
+        <input type="text" id="searchInput" placeholder="Query global datastreams..." class="cyber-input w-full rounded-xl px-4 py-3 text-sm placeholder-gray-600">
+        <button onclick="executeGlobalSearch()" class="neon-btn text-white font-bold text-xs uppercase tracking-widest px-8 rounded-xl cursor-pointer">
           Execute
         </button>
       </div>
@@ -86,71 +99,71 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       
       <!-- STREAM 1: WEATHER & FINANCIAL DATA FEEDS -->
-      <section class="glass-card p-6 rounded-2xl space-y-6">
-        <div class="flex justify-between items-center border-b border-orange-500/20 pb-3">
-          <h2 class="text-xs font-bold tracking-widest text-orange-400 uppercase neon-text-glow">Live Operations Data</h2>
-          <span class="text-[10px] bg-emerald-500/10 text-green-400 font-mono px-2 py-0.5 rounded border border-green-500/20">LIVE_STREAM</span>
+      <section class="cyber-glass p-6 rounded-2xl mb-8 md:mb-0" style="min-height: 340px;">
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <h2 class="text-xs font-bold tracking-widest uppercase text-gray-400">Live Operations Data</h2>
+          <span class="text-xs text-green-400 font-mono px-2 py-0.5 rounded bg-green-500 bg-opacity-10 border border-green-500 border-opacity-20">LIVE_STREAM</span>
         </div>
         
         <!-- Local Climatology Utility -->
-        <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-900/80 space-y-3">
-          <div class="flex gap-2">
-            <input type="text" id="weatherCity" placeholder="Target node location..." value="New York" class="bg-transparent text-xs px-3 py-2 rounded-lg text-white w-full font-medium">
-            <button onclick="fetchPortalWeather()" class="text-xs font-bold bg-slate-900 hover:bg-slate-800 text-orange-400 px-4 py-2 rounded-lg border border-slate-800 transition-colors cursor-pointer">SYNC</button>
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-900 mb-4">
+          <div class="flex gap-2 mb-2">
+            <input type="text" id="weatherCity" placeholder="Target location..." value="New York" class="cyber-input text-xs px-3 py-2 rounded-lg w-full font-medium">
+            <button onclick="fetchPortalWeather()" class="text-xs font-bold bg-gray-900 hover:bg-gray-800 text-orange-400 px-4 py-2 rounded-lg border border-gray-800 transition-colors cursor-pointer">SYNC</button>
           </div>
-          <div id="weatherTarget" class="text-sm font-medium text-slate-300 min-h-[40px] flex items-center">Establishing node link...</div>
+          <div id="weatherTarget" class="text-sm font-medium text-gray-300 min-h-10 flex items-center">Establishing node link...</div>
         </div>
 
         <!-- Crypto Asset Ledger Stream -->
-        <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-900/80 space-y-3">
-          <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex justify-between">
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-900">
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-wider flex justify-between mb-2">
             <span>Cryptographic Asset</span><span>Valuation Index</span>
           </div>
-          <div id="cryptoTarget" class="space-y-2.5 min-h-[50px] flex flex-col justify-center">Indexing blockchain metrics...</div>
+          <div id="cryptoTarget" class="space-y-2 text-sm">Indexing blockchain metrics...</div>
         </div>
       </section>
 
       <!-- STREAM 2: COMPOUND INTEREST ENGINE -->
-      <section class="glass-card p-6 rounded-2xl space-y-6">
-        <div class="flex justify-between items-center border-b border-orange-500/20 pb-3">
-          <h2 class="text-xs font-bold tracking-widest text-orange-400 uppercase neon-text-glow">Yield Optimizer</h2>
-          <span class="text-[10px] bg-orange-500/10 text-orange-400 font-mono px-2 py-0.5 rounded border border-orange-500/20">CALC_ENG_V4</span>
+      <section class="cyber-glass p-6 rounded-2xl">
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <h2 class="text-xs font-bold tracking-widest uppercase text-gray-400">Yield Optimizer</h2>
+          <span class="text-xs text-orange-400 font-mono px-2 py-0.5 rounded bg-orange-500 bg-opacity-10 border border-orange-500 border-opacity-20">CALC_ENG_V4</span>
         </div>
         <div class="space-y-3 text-xs">
-          <div>
-            <label class="block font-bold text-slate-400 uppercase tracking-wider mb-1.5">Principal Core Allocation ($)</label>
-            <input type="number" id="calcPrincipal" value="10000" class="w-full bg-transparent rounded-lg p-3 text-white font-mono font-bold">
+          <div class="mb-2">
+            <label class="block font-bold text-gray-400 uppercase tracking-wider mb-1">Principal Core Allocation ($)</label>
+            <input type="number" id="calcPrincipal" value="10000" class="cyber-input w-full rounded-lg p-3 font-mono font-bold">
           </div>
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-2 gap-3 mb-2">
             <div>
-              <label class="block font-bold text-slate-400 uppercase tracking-wider mb-1.5">Monthly Delta ($)</label>
-              <input type="number" id="calcMonthly" value="500" class="w-full bg-transparent rounded-lg p-3 text-white font-mono font-bold">
+              <label class="block font-bold text-gray-400 uppercase tracking-wider mb-1">Monthly Delta ($)</label>
+              <input type="number" id="calcMonthly" value="500" class="cyber-input w-full rounded-lg p-3 font-mono font-bold">
             </div>
             <div>
-              <label class="block font-bold text-slate-400 uppercase tracking-wider mb-1.5">Target Yield (%)</label>
-              <input type="number" id="calcRate" value="9.5" step="0.1" class="w-full bg-transparent rounded-lg p-3 text-white font-mono font-bold">
+              <label class="block font-bold text-gray-400 uppercase tracking-wider mb-1">Target Yield (%)</label>
+              <input type="number" id="calcRate" value="9.5" step="0.1" class="cyber-input w-full rounded-lg p-3 font-mono font-bold">
             </div>
           </div>
-          <div>
-            <label class="block font-bold text-slate-400 uppercase tracking-wider mb-1.5">Timeline Horizon Duration (Years)</label>
-            <input type="number" id="calcYears" value="12" class="w-full bg-transparent rounded-lg p-3 text-white font-mono font-bold">
+          <div class="mb-4">
+            <label class="block font-bold text-gray-400 uppercase tracking-wider mb-1">Timeline Horizon (Years)</label>
+            <input type="number" id="calcYears" value="12" class="cyber-input w-full rounded-lg p-3 font-mono font-bold">
           </div>
-          <button onclick="runYieldEngine()" class="w-full bg-orange-600 hover:bg-orange-500 py-3.5 rounded-xl font-bold text-xs text-white uppercase tracking-widest shadow-lg transition-all cursor-pointer mt-4 active:scale-[0.98]">
+          <button onclick="runYieldEngine()" class="neon-btn w-full py-3.5 rounded-xl font-bold text-xs text-white uppercase tracking-widest transition-all cursor-pointer">
             Compute Yield Projection
           </button>
         </div>
-        <div id="calcOutput" class="bg-slate-950/80 p-4 rounded-xl border border-orange-500/40 text-center font-mono text-sm text-green-400 font-bold hidden shadow-inner"></div>
+        <div id="calcOutput" class="bg-gray-950 p-4 rounded-xl border border-orange-500 border-opacity-30 text-center font-mono text-sm text-green-400 font-bold hidden mt-4"></div>
       </section>
 
       <!-- STREAM 3: NATIVE TRANSIT ROUTER -->
-      <section class="glass-card p-6 rounded-2xl space-y-4 md:col-span-2">
-        <div class="flex justify-between items-center border-b border-orange-500/20 pb-3">
-          <h2 class="text-xs font-bold tracking-widest text-orange-400 uppercase neon-text-glow">Transit Matrix Direct Link</h2>
-          <span class="text-[10px] bg-blue-500/10 text-blue-400 font-mono px-2 py-0.5 rounded border border-blue-500/20">GEOCENTRIC</span>
+      <section class="cyber-glass p-6 rounded-2xl md:col-span-2 mt-8">
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <h2 class="text-xs font-bold tracking-widest uppercase text-gray-400">Transit Matrix Direct Link</h2>
+          <span class="text-xs text-blue-400 font-mono px-2 py-0.5 rounded bg-blue-500 bg-opacity-10 border border-blue-500 border-opacity-20">GEOCENTRIC</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-3">
-          <input type="text" id="transitTarget" placeholder="Input target geographic coordinates or municipal name..." class="w-full bg-transparent rounded-xl px-4 py-3 text-xs text-white font-medium placeholder-slate-500">
-          <button onclick="launchTransitRoute()" class="bg-slate-900 hover:bg-slate-800 text-xs font-bold text-orange-400 px-6 py-3 rounded-xl border border-slate-800 tracking-wider whitespace-nowrap transition-all cursor-pointer active:scale-95">
+          <input type="text" id="transitTarget" placeholder="Input target coordinates or municipal name..." class="cyber-input w-full rounded-xl px-4 py-3 text-xs">
+          <button onclick="launchTransitRoute()" class="cyber-input hover:bg-gray-900 text-xs font-bold text-orange-400 px-6 py-3 rounded-xl tracking-wider whitespace-nowrap transition-all cursor-pointer">
             PLOT VECTOR
           </button>
         </div>
@@ -174,9 +187,15 @@
       window.open(targetUrl, '_blank');
     }
 
-    document.getElementById('searchInput').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') executeGlobalSearch();
-    });
+    // Capture Enter key triggers
+    setTimeout(() => {
+      const searchInput = document.getElementById('searchInput');
+      if(searchInput) {
+        searchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') executeGlobalSearch();
+        });
+      }
+    }, 500);
 
     async function fetchPortalWeather() {
       const city = document.getElementById('weatherCity').value || 'New York';
@@ -184,9 +203,3 @@
       const url = `https://wttr.in{encodeURIComponent(city)}?format=j1`;
       
       try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const cond = data.current_condition;
-        target.innerHTML = `
-          <div class="w-full flex justify-between items-center">
-            <div>
