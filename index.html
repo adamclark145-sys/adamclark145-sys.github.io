@@ -198,22 +198,18 @@
       window.open(targetUrl, '_blank');
     }
 
-    setTimeout(() => {
+    // Capture Enter key triggers across standard input models
+    document.addEventListener("DOMContentLoaded", () => {
       const searchInput = document.getElementById('searchInput');
       if(searchInput) {
         searchInput.addEventListener('keypress', (e) => {
           if (e.key === 'Enter') executeGlobalSearch();
         });
       }
-    }, 500);
+    });
 
     async function fetchPortalWeather() {
-      const city = document.getElementById('weatherCity').value || 'New York';
+      const city = document.getElementById('weatherCity').value.trim() || 'New York';
       const target = document.getElementById('weatherTarget');
-      const url = `https://wttr.in{encodeURIComponent(city)}?format=j1`;
       
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const cond = data.current_condition;
-        target.innerHTML = `
+      // Zero-friction, cross-origin open-source API parsing structural JSON configurations directly
