@@ -1,162 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Function Portal</title>
-    <!-- Tailwind CSS for clean, modern styling -->
-    <script src="https://jsdelivr.net"></script>
-    <style>
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fenix Portal</title>
+  <!-- Tailwind CSS Engine for Layout Styling -->
+  <script src="https://jsdelivr.net"></script>
+  <style>
+    body { background-color: #0f172a; color: #f8fafc; transition: all 0.3s ease; }
+    .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+  </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
-
-    <!-- Navigation Header -->
-    <header class="bg-slate-800 border-b border-slate-700 p-4 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <h1 class="text-xl font-bold tracking-wide text-indigo-400">HubPortal</h1>
-            <nav class="flex flex-wrap gap-2">
-                <button onclick="switchTab('search-tab')" class="tab-btn px-4 py-2 rounded bg-indigo-600 font-medium text-sm transition">Search & Maps</button>
-                <button onclick="switchTab('finance-tab')" class="tab-btn px-4 py-2 rounded bg-slate-700 font-medium text-sm hover:bg-slate-600 transition">Finance</button>
-                <button onclick="switchTab('utils-tab')" class="tab-btn px-4 py-2 rounded bg-slate-700 font-medium text-sm hover:bg-slate-600 transition">Utilities</button>
-            </nav>
-        </div>
+<body class="p-4 sm:p-6 min-h-screen">
+  <main class="max-w-6xl mx-auto space-y-6">
+    
+    <!-- HEADER -->
+    <header class="flex justify-between items-center border-b border-slate-800 pb-4">
+      <h1 class="text-xl font-bold tracking-wider text-orange-500">FENIX//PORTAL</h1>
+      <button onclick="toggleTheme()" class="bg-slate-800 px-3 py-1.5 rounded text-xs hover:bg-slate-700 transition-colors">Toggle Theme</button>
     </header>
 
-    <main class="max-w-4xl mx-auto p-4 sm:p-6 mt-4">
+    <!-- SEARCH UTILITY -->
+    <div class="glass-card p-4 rounded-xl shadow-lg flex flex-col sm:flex-row gap-3">
+      <select id="engineSelect" class="bg-slate-800 text-slate-200 px-3 py-2 rounded-lg border border-slate-700 text-sm focus:outline-none focus:border-orange-500">
+        <option value="google">Google</option>
+        <option value="duckduckgo">DuckDuckGo</option>
+        <option value="bing">Bing</option>
+      </select>
+      <div class="flex-1 flex gap-2">
+        <input type="text" id="searchInput" placeholder="Scan the web interface..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-orange-500 text-white">
+        <button onclick="executeGlobalSearch()" class="bg-orange-600 hover:bg-orange-500 px-6 py-2 rounded-lg font-medium text-sm transition-colors">Search</button>
+      </div>
+    </div>
+
+    <!-- MAIN WIDGET GRID -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- API FEEDS (WEATHER & CRYPTO) -->
+      <div class="glass-card p-5 rounded-xl space-y-4">
+        <h2 class="text-sm font-semibold tracking-wider text-slate-400 uppercase">Live Network Feeds</h2>
         
-        <!-- TAB 1: SEARCH & DIRECTIONS -->
-        <div id="search-tab" class="tab-content active space-y-6">
-            <!-- Search Widget -->
-            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
-                <h2 class="text-lg font-semibold mb-3 text-indigo-300">Global Web Search</h2>
-                <form action="https://duckduckgo.com" method="get" target="_blank" class="flex gap-2">
-                    <input type="text" name="q" placeholder="Search the web securely..." class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-white focus:outline-none focus:border-indigo-500">
-                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 rounded font-medium transition">Search</button>
-                </form>
-            </div>
-
-            <!-- Directions Quick-Link -->
-            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
-                <h2 class="text-lg font-semibold mb-3 text-indigo-300">Google Maps Directions</h2>
-                <div class="space-y-3">
-                    <input id="map-destination" type="text" placeholder="Enter destination address or city..." class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-white focus:outline-none focus:border-indigo-500">
-                    <button onclick="openDirections()" class="w-full bg-emerald-600 hover:bg-emerald-500 py-2.5 rounded font-medium transition">Get Routes & Directions</button>
-                </div>
-            </div>
+        <!-- Weather Sub-Component -->
+        <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800/80">
+          <div class="flex gap-2 mb-2">
+            <input type="text" id="weatherCity" placeholder="Enter city..." value="London" class="bg-slate-950 text-xs px-2 py-1 rounded border border-slate-700 focus:outline-none focus:border-orange-500 text-white w-full">
+            <button onclick="fetchPortalWeather()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded transition-colors">Fetch</button>
+          </div>
+          <div id="weatherTarget" class="text-sm text-slate-300">Syncing weather grid...</div>
         </div>
 
-        <!-- TAB 2: FINANCE CALCULATORS -->
-        <div id="finance-tab" class="tab-content space-y-6">
-            <!-- Compound Interest -->
-            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
-                <h2 class="text-lg font-semibold mb-4 text-indigo-300">Savings & Compound Interest</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">Principal ($)</label>
-                        <input id="finance-principal" type="number" value="1000" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">Annual Rate (%)</label>
-                        <input id="finance-rate" type="number" value="5" step="0.1" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">Years</label>
-                        <input id="finance-years" type="number" value="10" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white focus:outline-none">
-                    </div>
-                </div>
-                <button onclick="calculateInterest()" class="w-full bg-indigo-600 hover:bg-indigo-500 py-2 rounded font-medium transition mb-4">Calculate Future Balance</button>
-                <div id="finance-result" class="text-center p-3 bg-slate-900 rounded border border-slate-700 font-bold text-xl text-emerald-400 hidden"></div>
-            </div>
+        <!-- Crypto Sub-Component -->
+        <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800/80 space-y-2">
+          <div class="text-xs font-medium text-slate-400 flex justify-between">
+            <span>Asset Stream</span><span>24h Change</span>
+          </div>
+          <div id="cryptoTarget" class="text-sm space-y-1">Fetching values...</div>
         </div>
+      </div>
 
-        <!-- TAB 3: DAILY UTILITIES -->
-        <div id="utils-tab" class="tab-content space-y-6">
-            <!-- Password Generator -->
-            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
-                <h2 class="text-lg font-semibold mb-3 text-indigo-300">Secure Password Generator</h2>
-                <div class="flex gap-2 mb-4">
-                    <input id="generated-password" type="text" readonly class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-center font-mono text-emerald-400 focus:outline-none">
-                    <button onclick="generatePassword()" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2.5 rounded font-medium transition">Generate</button>
-                </div>
+      <!-- FINANCE CALCULATOR -->
+      <div class="glass-card p-5 rounded-xl space-y-4">
+        <h2 class="text-sm font-semibold tracking-wider text-slate-400 uppercase">Compound Interest Utility</h2>
+        <div class="space-y-2 text-xs">
+          <div>
+            <label class="block text-slate-400 mb-1">Starting Balance ($)</label>
+            <input type="number" id="calcPrincipal" value="5000" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white font-mono">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-slate-400 mb-1">Monthly Add ($)</label>
+              <input type="number" id="calcMonthly" value="200" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white font-mono">
             </div>
-
-            <!-- Basic Unit Converter -->
-            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
-                <h2 class="text-lg font-semibold mb-3 text-indigo-300">Unit Converter (Miles to KM)</h2>
-                <div class="flex flex-col sm:flex-row gap-3 items-center">
-                    <div class="w-full">
-                        <label class="block text-xs text-slate-400 mb-1">Miles</label>
-                        <input id="conv-miles" type="number" value="1" oninput="convertMiles()" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white focus:outline-none">
-                    </div>
-                    <span class="text-xl pt-4 hidden sm:block">➔</span>
-                    <div class="w-full">
-                        <label class="block text-xs text-slate-400 mb-1">Kilometers</label>
-                        <input id="conv-km" type="number" readonly class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-emerald-400 bg-opacity-50 font-medium">
-                    </div>
-                </div>
+            <div>
+              <label class="block text-slate-400 mb-1">Annual Return (%)</label>
+              <input type="number" id="calcRate" value="8" step="0.1" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white font-mono">
             </div>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Timeline Horizon (Years)</label>
+            <input type="number" id="calcYears" value="10" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white font-mono">
+          </div>
+          <button onclick="runYieldEngine()" class="w-full bg-orange-600 hover:bg-orange-500 py-2.5 rounded font-semibold text-white tracking-wide transition-colors mt-2">Compute Future Value</button>
         </div>
+        <div id="calcOutput" class="bg-slate-950/60 p-3 rounded-lg border border-slate-800 text-center font-mono text-sm text-green-400 font-bold hidden"></div>
+      </div>
 
-    </main>
+      <!-- TRAVEL SHORTCUT ENGINE -->
+      <div class="glass-card p-5 rounded-xl space-y-3 md:col-span-2">
+        <h2 class="text-sm font-semibold tracking-wider text-slate-400 uppercase">Transit Routing Engine</h2>
+        <div class="flex gap-2">
+          <input type="text" id="transitTarget" placeholder="Enter target address or city..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-orange-500 text-white">
+          <button onclick="launchTransitRoute()" class="bg-slate-800 hover:bg-slate-700 text-xs text-orange-400 px-4 py-2 font-bold rounded-lg border border-orange-500/20 whitespace-nowrap transition-all">Plot Route</button>
+        </div>
+      </div>
 
-    <!-- App JavaScript Logic -->
-    <script>
-        // Simple View Switching
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600');
-                btn.classList.add('bg-slate-700');
-            });
-            
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.remove('bg-slate-700');
-            event.currentTarget.classList.add('bg-indigo-600');
-        }
+    </div>
+  </main>
 
-        // Map Redirect logic
-        function openDirections() {
-            const destination = encodeURIComponent(document.getElementById('map-destination').value);
-            if (destination) {
-                window.open(`https://google.com{destination}`, '_blank');
-            }
-        }
+  <!-- APPLICATION LOGIC INTERFACES -->
+  <script>
+    function executeGlobalSearch() {
+      const engine = document.getElementById('engineSelect').value;
+      const input = document.getElementById('searchInput').value.trim();
+      if (!input) return;
+      
+      let targetUrl = '';
+      if (engine === 'google') targetUrl = `https://google.com{encodeURIComponent(input)}`;
+      if (engine === 'duckduckgo') targetUrl = `https://duckduckgo.com{encodeURIComponent(input)}`;
+      if (engine === 'bing') targetUrl = `https://bing.com{encodeURIComponent(input)}`;
+      
+      window.open(targetUrl, '_blank');
+    }
 
-        // Compound Interest Math formula
-        function calculateInterest() {
-            const p = parseFloat(document.getElementById('finance-principal').value) || 0;
-            const r = (parseFloat(document.getElementById('finance-rate').value) || 0) / 100;
-            const t = parseFloat(document.getElementById('finance-years').value) || 0;
-            
-            const total = p * Math.pow((1 + r), t);
-            
-            const display = document.getElementById('finance-result');
-            display.innerText = `Estimated Total: $${total.toFixed(2)}`;
-            display.classList.remove('hidden');
-        }
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') executeGlobalSearch();
+    });
 
-        // Password Generator
-        function generatePassword() {
-            const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
-            let pass = "";
-            for (let i = 0; i < 16; i++) {
-                pass += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            document.getElementById('generated-password').value = pass;
-        }
+    async function fetchPortalWeather() {
+      const city = document.getElementById('weatherCity').value || 'London';
+      const target = document.getElementById('weatherTarget');
+      const url = `https://wttr.in{encodeURIComponent(city)}?format=j1`;
+      
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        const cond = data.current_condition[0];
+        target.innerHTML = `
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-white">${city.toUpperCase()}</span>
+            <span class="text-orange-400 font-semibold">${cond.temp_C}°C</span>
+          </div>
+          <div class="text-xs text-slate-400 mt-1">Condition: ${cond.weatherDesc[0].value} | Humidity: ${cond.humidity}%</div>
+        `;
+      } catch (err) {
+        target.innerText = "Weather feed temporary disconnect.";
+      }
+    }
 
-        // Unit Converter
-        function convertMiles() {
-            const miles = parseFloat(document.getElementById('conv-miles').value) || 0;
-            document.getElementById('conv-km').value = (miles * 1.60934).toFixed(3);
-        }
+    async function fetchCryptoPrices() {
+      const target = document.getElementById('cryptoTarget');
+      const url = 'https://coingecko.com';
+      
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        const btcUp = data.bitcoin.usd_24h_change >= 0;
+        const ethUp = data.ethereum.usd_24h_change >= 0;
+        
+        target.innerHTML = `
+          <div class="flex justify-between">
+            <span class="text-white font-mono">BTC/USD</span>
+            <span class="${btcUp ? 'text-green-400' : 'text-red-400'} font-mono">$${data.bitcoin.usd.toLocaleString()} (${data.bitcoin.usd_24h_change.toFixed(2)}%)</span>
+          </div>
+          <div class="flex justify-between mt-1">
+            <span class="text-white font-mono">ETH/USD</span>
+            <span class="${ethUp ? 'text-green-400' : 'text-red-400'} font-mono">$${data.ethereum.usd.toLocaleString()} (${data.ethereum.usd_24h_change.toFixed(2)}%)</span>
+          </div>
+        `;
+      } catch (err) {
+        target.innerText = "Asset server data delay.";
+      }
+    }
 
-        // Run default state values on startup
-        convertMiles();
-        generatePassword();
-    </script>
-</body>
-</html>
+    function runYieldEngine() {
+      const principal = parseFloat(document.getElementById('calcPrincipal').value) || 0;
+      const monthly = parseFloat(document.getElementById('calcMonthly').value) || 0;
+      const annualRate = (parseFloat(document.getElementById('calcRate').value) || 0) / 100;
+      const years = parseInt(document.getElementById('calcYears').value) || 0;
+      
+      const monthlyRate = annualRate / 12;
+      const totalMonths = years * 12;
+      let balance = principal;
+      
+      for (let m = 0; m < totalMonths; m++) {
+        balance = (balance + monthly) * (1 + monthlyRate);
+      }
+      
+      const output = document.getElementById('calcOutput');
+      output.innerText = `PROJECTED MATRIX BALANCE: $${balance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      output.classList.remove('hidden');
+    }
+
+    function launchTransitRoute() {
+      const query = document.getElementById('transitTarget').value.trim();
+      if (!query) return;
+      const url = `https://google.com{encodeURIComponent(query)}`;
+      window.open(url, '_blank');
+    }
+
+    function toggleTheme() {
+      const current = localStorage.getItem('portalTheme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+
