@@ -3,101 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fenix Portal</title>
-  <!-- Tailwind CSS Engine for Layout Styling -->
+  <title>FENIX // INTELLIGENCE HUB</title>
+  <!-- Tailwind CSS Engine -->
   <script src="https://jsdelivr.net"></script>
   <style>
-    body { background-color: #0f172a; color: #f8fafc; transition: all 0.3s ease; }
-    .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+    /* Premium Cyber-Slate & Neon Styling */
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(30, 58, 138, 0.2) 0px, transparent 50%);
+      background-attachment: fixed;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(249, 115, 22, 0.5);
+      box-shadow: 0 0 35px rgba(249, 115, 22, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .neon-text-glow {
+      text-shadow: 0 0 12px rgba(249, 115, 22, 0.8), 0 0 2px rgba(249, 115, 22, 1);
+    }
+
+    .neon-border-glow {
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+    }
+
+    /* Custom Form Control Reset */
+    input, select {
+      background-color: rgba(7, 10, 19, 0.8) !important;
+      border: 1px solid rgba(249, 115, 22, 0.2) !important;
+      color: #ffffff !important;
+      transition: all 0.2s ease;
+    }
+    input:focus, select:focus {
+      border-color: #f97316 !important;
+      box-shadow: 0 0 12px rgba(249, 115, 22, 0.4) !important;
+    }
   </style>
 </head>
-<body class="p-4 sm:p-6 min-h-screen">
-  <main class="max-w-6xl mx-auto space-y-6">
+<body class="p-4 sm:p-8 min-h-screen font-sans antialiased">
+  
+  <div class="max-w-6xl mx-auto space-y-8">
     
-    <!-- HEADER -->
-    <header class="flex justify-between items-center border-b border-slate-800 pb-4">
-      <h1 class="text-xl font-bold tracking-wider text-orange-500">FENIX//PORTAL</h1>
-      <button onclick="toggleTheme()" class="bg-slate-800 px-3 py-1.5 rounded text-xs hover:bg-slate-700 transition-colors">Toggle Theme</button>
+    <!-- HEADER HUB -->
+    <header class="flex justify-between items-center border-b border-slate-800/80 pb-5">
+      <div class="flex items-center space-x-3">
+        <div class="h-3 w-3 rounded-full bg-orange-500 animate-pulse shadow-[0_0_15px_#f97316]"></div>
+        <h1 class="text-xl font-black tracking-widest text-orange-500 uppercase neon-text-glow">Fenix // Portal</h1>
+      </div>
+      <span class="text-[10px] text-slate-500 font-mono tracking-wider">v4.0.0_CYBERPUNK</span>
     </header>
 
-    <!-- SEARCH UTILITY -->
-    <div class="glass-card p-4 rounded-xl shadow-lg flex flex-col sm:flex-row gap-3">
-      <select id="engineSelect" class="bg-slate-800 text-slate-200 px-3 py-2 rounded-lg border border-slate-700 text-sm focus:outline-none focus:border-orange-500">
-        <option value="google">Google</option>
-        <option value="duckduckgo">DuckDuckGo</option>
-        <option value="bing">Bing</option>
+    <!-- UNIFIED GLOBAL SEARCH ENGINE -->
+    <section class="glass-card p-3 rounded-2xl flex flex-col md:flex-row gap-3">
+      <select id="engineSelect" class="bg-transparent text-slate-200 font-bold text-xs px-4 py-3.5 rounded-xl outline-none cursor-pointer md:w-44">
+        <option value="google">⚡ GOOGLE ENGINE</option>
+        <option value="duckduckgo">🔒 DUCKDUCKGO</option>
+        <option value="bing">🔍 BING SEARCH</option>
       </select>
-      <div class="flex-1 flex gap-2">
-        <input type="text" id="searchInput" placeholder="Scan the web interface..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-orange-500 text-white">
-        <button onclick="executeGlobalSearch()" class="bg-orange-600 hover:bg-orange-500 px-6 py-2 rounded-lg font-medium text-sm transition-colors">Search</button>
+      <div class="flex-1 flex gap-2 p-1 md:p-0">
+        <input type="text" id="searchInput" placeholder="Query global datastreams..." class="w-full bg-transparent rounded-xl px-4 py-3 text-sm outline-none text-white font-medium placeholder-slate-500">
+        <button onclick="executeGlobalSearch()" class="bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs uppercase tracking-widest px-8 rounded-xl transition-all neon-border-glow cursor-pointer active:scale-95">
+          Execute
+        </button>
       </div>
-    </div>
+    </section>
 
-    <!-- MAIN WIDGET GRID -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- METRIC CONTROL HUB GRID -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       
-      <!-- API FEEDS (WEATHER & CRYPTO) -->
-      <div class="glass-card p-5 rounded-xl space-y-4">
-        <h2 class="text-sm font-semibold tracking-wider text-slate-400 uppercase">Live Network Feeds</h2>
+      <!-- STREAM 1: WEATHER & FINANCIAL DATA FEEDS -->
+      <section class="glass-card p-6 rounded-2xl space-y-6">
+        <div class="flex justify-between items-center border-b border-orange-500/20 pb-3">
+          <h2 class="text-xs font-bold tracking-widest text-orange-400 uppercase neon-text-glow">Live Operations Data</h2>
+          <span class="text-[10px] bg-emerald-500/10 text-green-400 font-mono px-2 py-0.5 rounded border border-green-500/20">LIVE_STREAM</span>
+        </div>
         
-        <!-- Weather Sub-Component -->
-        <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800/80">
-          <div class="flex gap-2 mb-2">
-            <input type="text" id="weatherCity" placeholder="Enter city..." value="London" class="bg-slate-950 text-xs px-2 py-1 rounded border border-slate-700 focus:outline-none focus:border-orange-500 text-white w-full">
-            <button onclick="fetchPortalWeather()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded transition-colors">Fetch</button>
+        <!-- Local Climatology Utility -->
+        <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-900/80 space-y-3">
+          <div class="flex gap-2">
+            <input type="text" id="weatherCity" placeholder="Target node location..." value="New York" class="bg-transparent text-xs px-3 py-2 rounded-lg text-white w-full font-medium">
+            <button onclick="fetchPortalWeather()" class="text-xs font-bold bg-slate-900 hover:bg-slate-800 text-orange-400 px-4 py-2 rounded-lg border border-slate-800 transition-colors cursor-pointer">SYNC</button>
           </div>
-          <div id="weatherTarget" class="text-sm text-slate-300">Syncing weather grid...</div>
+          <div id="weatherTarget" class="text-sm font-medium text-slate-300 min-h-[40px] flex items-center">Establishing node link...</div>
         </div>
 
-        <!-- Crypto Sub-Component -->
-        <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800/80 space-y-2">
-          <div class="text-xs font-medium text-slate-400 flex justify-between">
-            <span>Asset Stream</span><span>24h Change</span>
+        <!-- Crypto Asset Ledger Stream -->
+        <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-900/80 space-y-3">
+          <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex justify-between">
+            <span>Cryptographic Asset</span><span>Valuation Index</span>
           </div>
-          <div id="cryptoTarget" class="text-sm space-y-1">Fetching values...</div>
+          <div id="cryptoTarget" class="space-y-2.5 min-h-[50px] flex flex-col justify-center">Indexing blockchain metrics...</div>
         </div>
-      </div>
+      </section>
 
-      <!-- FINANCE CALCULATOR -->
-      <div class="glass-card p-5 rounded-xl space-y-4">
-        <h2 class="text-sm font-semibold tracking-wider text-slate-400 uppercase">Compound Interest Utility</h2>
-        <div class="space-y-2 text-xs">
+      <!-- STREAM 2: COMPOUND INTEREST ENGINE -->
+      <section class="glass-card p-6 rounded-2xl space-y-6">
+        <div class="flex justify-between items-center border-b border-orange-500/20 pb-3">
+          <h2 class="text-xs font-bold tracking-widest text-orange-400 uppercase neon-text-glow">Yield Optimizer</h2>
+          <span class="text-[10px] bg-orange-500/10 text-orange-400 font-mono px-2 py-0.5 rounded border border-orange-500/20">CALC_ENG_V4</span>
+        </div>
+        <div class="space-y-3 text-xs">
           <div>
-            <label class="block text-slate-400 mb-1">Starting Balance ($)</label>
-            <input type="number" id="calcPrincipal" value="5000" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white font-mono">
+            <label class="block font-bold text-slate-400 uppercase tracking-wider mb-1.5">Principal Core Allocation ($)</label>
+            <input type="number" id="calcPrincipal" value="10000" class="w-full bg-transparent rounded-lg p-3 text-white font-mono font-bold">
           </div>
-          <div class="grid grid-cols-2 gap-2">
+          <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-slate-400 mb-1">Monthly Add ($)</label>
-              <input type="number" id="calcMonthly" value="200" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white font-mono">
+              <label class="block font-bold text-slate-400 uppercase tracking-wider mb-1.5">Monthly Delta ($)</label>
+              <input type="number" id="calcMonthly" value="500" class="w-full bg-transparent rounded-lg p-3 text-white font-mono font-bold">
             </div>
             <div>
-              <label class="block text-slate-400 mb-1">Annual Return (%)</label>
-              <input type="number" id="calcRate" value="8" step="0.1" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white font-mono">
+              <label class="block font-bold text-slate-400 uppercase tracking-wider mb-1.5">Target Yield (%)</label>
+              <input type="number" id="calcRate" value="9.5" step="0.1" class="w-full bg-transparent rounded-lg p-3 text-white font-mono font-bold">
             </div>
           </div>
           <div>
-            <label class="block text-slate-400 mb-1">Timeline Horizon (Years)</label>
-            <input type="number" id="calcYears" value="10" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white font-mono">
+            <label class="block font-bold text-slate-400 uppercase tracking-wider mb-1.5">Timeline Horizon Duration (Years)</label>
+            <input type="number" id="calcYears" value="12" class="w-full bg-transparent rounded-lg p-3 text-white font-mono font-bold">
           </div>
-          <button onclick="runYieldEngine()" class="w-full bg-orange-600 hover:bg-orange-500 py-2.5 rounded font-semibold text-white tracking-wide transition-colors mt-2">Compute Future Value</button>
+          <button onclick="runYieldEngine()" class="w-full bg-orange-600 hover:bg-orange-500 py-3.5 rounded-xl font-bold text-xs text-white uppercase tracking-widest shadow-lg transition-all cursor-pointer mt-4 active:scale-[0.98]">
+            Compute Yield Projection
+          </button>
         </div>
-        <div id="calcOutput" class="bg-slate-950/60 p-3 rounded-lg border border-slate-800 text-center font-mono text-sm text-green-400 font-bold hidden"></div>
-      </div>
+        <div id="calcOutput" class="bg-slate-950/80 p-4 rounded-xl border border-orange-500/40 text-center font-mono text-sm text-green-400 font-bold hidden shadow-inner"></div>
+      </section>
 
-      <!-- TRAVEL SHORTCUT ENGINE -->
-      <div class="glass-card p-5 rounded-xl space-y-3 md:col-span-2">
-        <h2 class="text-sm font-semibold tracking-wider text-slate-400 uppercase">Transit Routing Engine</h2>
-        <div class="flex gap-2">
-          <input type="text" id="transitTarget" placeholder="Enter target address or city..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-orange-500 text-white">
-          <button onclick="launchTransitRoute()" class="bg-slate-800 hover:bg-slate-700 text-xs text-orange-400 px-4 py-2 font-bold rounded-lg border border-orange-500/20 whitespace-nowrap transition-all">Plot Route</button>
+      <!-- STREAM 3: NATIVE TRANSIT ROUTER -->
+      <section class="glass-card p-6 rounded-2xl space-y-4 md:col-span-2">
+        <div class="flex justify-between items-center border-b border-orange-500/20 pb-3">
+          <h2 class="text-xs font-bold tracking-widest text-orange-400 uppercase neon-text-glow">Transit Matrix Direct Link</h2>
+          <span class="text-[10px] bg-blue-500/10 text-blue-400 font-mono px-2 py-0.5 rounded border border-blue-500/20">GEOCENTRIC</span>
         </div>
-      </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input type="text" id="transitTarget" placeholder="Input target geographic coordinates or municipal name..." class="w-full bg-transparent rounded-xl px-4 py-3 text-xs text-white font-medium placeholder-slate-500">
+          <button onclick="launchTransitRoute()" class="bg-slate-900 hover:bg-slate-800 text-xs font-bold text-orange-400 px-6 py-3 rounded-xl border border-slate-800 tracking-wider whitespace-nowrap transition-all cursor-pointer active:scale-95">
+            PLOT VECTOR
+          </button>
+        </div>
+      </section>
 
     </div>
-  </main>
+  </div>
 
-  <!-- APPLICATION LOGIC INTERFACES -->
+  <!-- CORE UTILITY ALGORITHMS -->
   <script>
     function executeGlobalSearch() {
       const engine = document.getElementById('engineSelect').value;
@@ -117,78 +179,14 @@
     });
 
     async function fetchPortalWeather() {
-      const city = document.getElementById('weatherCity').value || 'London';
+      const city = document.getElementById('weatherCity').value || 'New York';
       const target = document.getElementById('weatherTarget');
       const url = `https://wttr.in{encodeURIComponent(city)}?format=j1`;
       
       try {
         const res = await fetch(url);
         const data = await res.json();
-        const cond = data.current_condition[0];
+        const cond = data.current_condition;
         target.innerHTML = `
-          <div class="flex justify-between items-center">
-            <span class="font-bold text-white">${city.toUpperCase()}</span>
-            <span class="text-orange-400 font-semibold">${cond.temp_C}°C</span>
-          </div>
-          <div class="text-xs text-slate-400 mt-1">Condition: ${cond.weatherDesc[0].value} | Humidity: ${cond.humidity}%</div>
-        `;
-      } catch (err) {
-        target.innerText = "Weather feed temporary disconnect.";
-      }
-    }
-
-    async function fetchCryptoPrices() {
-      const target = document.getElementById('cryptoTarget');
-      const url = 'https://coingecko.com';
-      
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const btcUp = data.bitcoin.usd_24h_change >= 0;
-        const ethUp = data.ethereum.usd_24h_change >= 0;
-        
-        target.innerHTML = `
-          <div class="flex justify-between">
-            <span class="text-white font-mono">BTC/USD</span>
-            <span class="${btcUp ? 'text-green-400' : 'text-red-400'} font-mono">$${data.bitcoin.usd.toLocaleString()} (${data.bitcoin.usd_24h_change.toFixed(2)}%)</span>
-          </div>
-          <div class="flex justify-between mt-1">
-            <span class="text-white font-mono">ETH/USD</span>
-            <span class="${ethUp ? 'text-green-400' : 'text-red-400'} font-mono">$${data.ethereum.usd.toLocaleString()} (${data.ethereum.usd_24h_change.toFixed(2)}%)</span>
-          </div>
-        `;
-      } catch (err) {
-        target.innerText = "Asset server data delay.";
-      }
-    }
-
-    function runYieldEngine() {
-      const principal = parseFloat(document.getElementById('calcPrincipal').value) || 0;
-      const monthly = parseFloat(document.getElementById('calcMonthly').value) || 0;
-      const annualRate = (parseFloat(document.getElementById('calcRate').value) || 0) / 100;
-      const years = parseInt(document.getElementById('calcYears').value) || 0;
-      
-      const monthlyRate = annualRate / 12;
-      const totalMonths = years * 12;
-      let balance = principal;
-      
-      for (let m = 0; m < totalMonths; m++) {
-        balance = (balance + monthly) * (1 + monthlyRate);
-      }
-      
-      const output = document.getElementById('calcOutput');
-      output.innerText = `PROJECTED MATRIX BALANCE: $${balance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-      output.classList.remove('hidden');
-    }
-
-    function launchTransitRoute() {
-      const query = document.getElementById('transitTarget').value.trim();
-      if (!query) return;
-      const url = `https://google.com{encodeURIComponent(query)}`;
-      window.open(url, '_blank');
-    }
-
-    function toggleTheme() {
-      const current = localStorage.getItem('portalTheme') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
-
+          <div class="w-full flex justify-between items-center">
+            <div>
