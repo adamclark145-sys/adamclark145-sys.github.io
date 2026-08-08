@@ -20,7 +20,6 @@
       background-attachment: fixed !important;
     }
     
-    /* Clean Slate Cards replacing aggressive glows */
     .pro-card {
       background: rgba(17, 24, 39, 0.6) !important;
       backdrop-filter: blur(20px);
@@ -35,7 +34,6 @@
       background: rgba(17, 24, 39, 0.7) !important;
     }
 
-    /* Muted Slate Forms with Subtle Accents */
     .pro-input {
       background-color: rgba(10, 15, 26, 0.8) !important;
       border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -49,7 +47,6 @@
       box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.15) !important;
     }
     
-    /* Premium Orange Interactive Buttons */
     .pro-btn {
       background-color: #f97316 !important;
       color: #ffffff !important;
@@ -60,9 +57,6 @@
     .pro-btn:hover {
       background-color: #ea580c !important;
       transform: translateY(-0.5px);
-    }
-    .pro-btn:active {
-      transform: translateY(0.5px);
     }
 
     select option {
@@ -87,21 +81,24 @@
       </div>
     </header>
 
-    <!-- STREAMLINED MULTI-ENGINE SEARCH BAR -->
-    <section class="pro-card p-3 flex flex-col md:flex-row gap-3 mb-8 items-center shadow-sm">
-      <div class="w-full md:w-48 relative">
-        <select id="engineSelect" class="pro-input w-full font-medium text-xs p-3 cursor-pointer appearance-none bg-no-repeat">
-          <option value="google">Google Index</option>
-          <option value="duckduckgo">DuckDuckGo Core</option>
-          <option value="bing">Bing Intelligence</option>
-        </select>
-      </div>
-      <div class="flex-1 flex gap-2 w-full">
-        <input type="text" id="searchInput" placeholder="Enter universal web query..." class="pro-input w-full px-4 py-3 text-sm placeholder-gray-500">
-        <button onclick="executeGlobalSearch()" class="pro-btn text-xs uppercase tracking-wider px-8 cursor-pointer whitespace-nowrap">
-          Search
-        </button>
-      </div>
+    <!-- NATIVE SYSTEM SEARCH ENGINE (Bypasses All Pop-Up Blockers) -->
+    <section class="pro-card p-3 mb-8 shadow-sm">
+      <form id="searchForm" action="https://google.com" method="get" target="_blank" class="flex flex-col md:flex-row gap-3 items-center w-full">
+        <div class="w-full md:w-48 relative">
+          <select id="engineSelect" onchange="updateSearchEngineRoute()" class="pro-input w-full font-medium text-xs p-3 cursor-pointer appearance-none">
+            <option value="google">Google Index</option>
+            <option value="duckduckgo">DuckDuckGo Core</option>
+            <option value="bing">Bing Intelligence</option>
+          </select>
+        </div>
+        <div class="flex-1 flex gap-2 w-full">
+          <!-- Dynamic name parameter mapping aligns queries natively with selected engine APIs -->
+          <input type="text" id="searchInput" name="q" placeholder="Enter universal web query..." class="pro-input w-full px-4 py-3 text-sm placeholder-gray-500" required>
+          <button type="submit" class="pro-btn text-xs uppercase tracking-wider px-8 cursor-pointer whitespace-nowrap">
+            Search
+          </button>
+        </div>
+      </form>
     </section>
 
     <!-- MULTI-FUNCTION UTILITY GRID -->
@@ -185,31 +182,31 @@
 
   <!-- APPLICATION COMPILER SCRIPT -->
   <script>
-    function executeGlobalSearch() {
+    // Updates form structure parameter routes securely on the fly based on select choices
+    function updateSearchEngineRoute() {
       const engine = document.getElementById('engineSelect').value;
-      const input = document.getElementById('searchInput').value.trim();
-      if (!input) return;
+      const form = document.getElementById('searchForm');
       
-      let targetUrl = '';
-      if (engine === 'google') targetUrl = `https://google.com{encodeURIComponent(input)}`;
-      if (engine === 'duckduckgo') targetUrl = `https://duckduckgo.com{encodeURIComponent(input)}`;
-      if (engine === 'bing') targetUrl = `https://bing.com{encodeURIComponent(input)}`;
-      
-      window.open(targetUrl, '_blank');
-    }
-
-    // Capture Enter key triggers across standard input models
-    document.addEventListener("DOMContentLoaded", () => {
-      const searchInput = document.getElementById('searchInput');
-      if(searchInput) {
-        searchInput.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') executeGlobalSearch();
-        });
+      if (engine === 'google') {
+        form.action = "https://google.com";
+      } else if (engine === 'duckduckgo') {
+        form.action = "https://duckduckgo.com";
+      } else if (engine === 'bing') {
+        form.action = "https://bing.com";
       }
-    });
+    }
 
     async function fetchPortalWeather() {
       const city = document.getElementById('weatherCity').value.trim() || 'New York';
       const target = document.getElementById('weatherTarget');
+      const url = `https://wttr.in{encodeURIComponent(city)}?format=j1`;
       
-      // Zero-friction, cross-origin open-source API parsing structural JSON configurations directly
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Connection error");
+        const data = await res.json();
+        const cond = data.current_condition[0];
+        
+        target.innerHTML = `
+          <div class="w-full flex justify-between items-center">
+            <div>
