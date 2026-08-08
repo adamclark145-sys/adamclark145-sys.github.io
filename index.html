@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Function Portal</title>
+    <!-- Tailwind CSS for clean, modern styling -->
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
+
+    <!-- Navigation Header -->
+    <header class="bg-slate-800 border-b border-slate-700 p-4 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <h1 class="text-xl font-bold tracking-wide text-indigo-400">HubPortal</h1>
+            <nav class="flex flex-wrap gap-2">
+                <button onclick="switchTab('search-tab')" class="tab-btn px-4 py-2 rounded bg-indigo-600 font-medium text-sm transition">Search & Maps</button>
+                <button onclick="switchTab('finance-tab')" class="tab-btn px-4 py-2 rounded bg-slate-700 font-medium text-sm hover:bg-slate-600 transition">Finance</button>
+                <button onclick="switchTab('utils-tab')" class="tab-btn px-4 py-2 rounded bg-slate-700 font-medium text-sm hover:bg-slate-600 transition">Utilities</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 sm:p-6 mt-4">
+        
+        <!-- TAB 1: SEARCH & DIRECTIONS -->
+        <div id="search-tab" class="tab-content active space-y-6">
+            <!-- Search Widget -->
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
+                <h2 class="text-lg font-semibold mb-3 text-indigo-300">Global Web Search</h2>
+                <form action="https://duckduckgo.com" method="get" target="_blank" class="flex gap-2">
+                    <input type="text" name="q" placeholder="Search the web securely..." class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-white focus:outline-none focus:border-indigo-500">
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 rounded font-medium transition">Search</button>
+                </form>
+            </div>
+
+            <!-- Directions Quick-Link -->
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
+                <h2 class="text-lg font-semibold mb-3 text-indigo-300">Google Maps Directions</h2>
+                <div class="space-y-3">
+                    <input id="map-destination" type="text" placeholder="Enter destination address or city..." class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-white focus:outline-none focus:border-indigo-500">
+                    <button onclick="openDirections()" class="w-full bg-emerald-600 hover:bg-emerald-500 py-2.5 rounded font-medium transition">Get Routes & Directions</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: FINANCE CALCULATORS -->
+        <div id="finance-tab" class="tab-content space-y-6">
+            <!-- Compound Interest -->
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
+                <h2 class="text-lg font-semibold mb-4 text-indigo-300">Savings & Compound Interest</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">Principal ($)</label>
+                        <input id="finance-principal" type="number" value="1000" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">Annual Rate (%)</label>
+                        <input id="finance-rate" type="number" value="5" step="0.1" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">Years</label>
+                        <input id="finance-years" type="number" value="10" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white focus:outline-none">
+                    </div>
+                </div>
+                <button onclick="calculateInterest()" class="w-full bg-indigo-600 hover:bg-indigo-500 py-2 rounded font-medium transition mb-4">Calculate Future Balance</button>
+                <div id="finance-result" class="text-center p-3 bg-slate-900 rounded border border-slate-700 font-bold text-xl text-emerald-400 hidden"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: DAILY UTILITIES -->
+        <div id="utils-tab" class="tab-content space-y-6">
+            <!-- Password Generator -->
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
+                <h2 class="text-lg font-semibold mb-3 text-indigo-300">Secure Password Generator</h2>
+                <div class="flex gap-2 mb-4">
+                    <input id="generated-password" type="text" readonly class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-center font-mono text-emerald-400 focus:outline-none">
+                    <button onclick="generatePassword()" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2.5 rounded font-medium transition">Generate</button>
+                </div>
+            </div>
+
+            <!-- Basic Unit Converter -->
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
+                <h2 class="text-lg font-semibold mb-3 text-indigo-300">Unit Converter (Miles to KM)</h2>
+                <div class="flex flex-col sm:flex-row gap-3 items-center">
+                    <div class="w-full">
+                        <label class="block text-xs text-slate-400 mb-1">Miles</label>
+                        <input id="conv-miles" type="number" value="1" oninput="convertMiles()" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white focus:outline-none">
+                    </div>
+                    <span class="text-xl pt-4 hidden sm:block">➔</span>
+                    <div class="w-full">
+                        <label class="block text-xs text-slate-400 mb-1">Kilometers</label>
+                        <input id="conv-km" type="number" readonly class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-emerald-400 bg-opacity-50 font-medium">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- App JavaScript Logic -->
+    <script>
+        // Simple View Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600');
+                btn.classList.add('bg-slate-700');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.remove('bg-slate-700');
+            event.currentTarget.classList.add('bg-indigo-600');
+        }
+
+        // Map Redirect logic
+        function openDirections() {
+            const destination = encodeURIComponent(document.getElementById('map-destination').value);
+            if (destination) {
+                window.open(`https://google.com{destination}`, '_blank');
+            }
+        }
+
+        // Compound Interest Math formula
+        function calculateInterest() {
+            const p = parseFloat(document.getElementById('finance-principal').value) || 0;
+            const r = (parseFloat(document.getElementById('finance-rate').value) || 0) / 100;
+            const t = parseFloat(document.getElementById('finance-years').value) || 0;
+            
+            const total = p * Math.pow((1 + r), t);
+            
+            const display = document.getElementById('finance-result');
+            display.innerText = `Estimated Total: $${total.toFixed(2)}`;
+            display.classList.remove('hidden');
+        }
+
+        // Password Generator
+        function generatePassword() {
+            const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+            let pass = "";
+            for (let i = 0; i < 16; i++) {
+                pass += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('generated-password').value = pass;
+        }
+
+        // Unit Converter
+        function convertMiles() {
+            const miles = parseFloat(document.getElementById('conv-miles').value) || 0;
+            document.getElementById('conv-km').value = (miles * 1.60934).toFixed(3);
+        }
+
+        // Run default state values on startup
+        convertMiles();
+        generatePassword();
+    </script>
+</body>
+</html>
